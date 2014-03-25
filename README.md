@@ -31,4 +31,5 @@ generation of pastel-like colors.
 
 ### 1.0.0
 
-* Make Quzah available in the central repository.
+* Make Quzah available in the central repository (blocking on the availability
+  of *commons-imaging*).
