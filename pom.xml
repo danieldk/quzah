@@ -7,6 +7,36 @@
     <groupId>eu.danieldk.quzah</groupId>
     <artifactId>quzah</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>Quzah</name>
+    <description>Quzah is a library for generating sets of visually distinct colors.</description>
+    <url>http://github.com/danieldk/quzah</url>
+
+    <scm>
+        <url>git@github.com:danieldk/quzah.git</url>
+        <connection>scm:git:git@github.com:danieldk/quzah.git</connection>
+        <developerConnection>scm:git:git@github.com:danieldk/quzah.git</developerConnection>
+    </scm>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>danieldk</id>
+            <name>Daniel de kok</name>
+            <email>me@danieldk.eu</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
     <repositories>
         <repository>
