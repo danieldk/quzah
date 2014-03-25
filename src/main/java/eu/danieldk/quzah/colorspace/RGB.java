@@ -14,6 +14,13 @@ public class RGB {
 
     public final int b;
 
+    public RGB(int rgb) {
+        this.alpha = (rgb >>> 24) & 0xff;
+        this.r = (rgb >>> 16) & 0xff;
+        this.g = (rgb >>> 8) & 0xff;
+        this.b = rgb & 0xff;
+    }
+
     public RGB(int r, int g, int b) {
         this(0xff, r, g, b);
     }
