@@ -1,7 +1,6 @@
 package eu.danieldk.quzah.colorset;
 
 import eu.danieldk.quzah.colorspace.RGB;
-import eu.danieldk.quzah.random.PastelRandomRGB;
 import eu.danieldk.quzah.random.RandomRGB;
 import org.apache.commons.imaging.color.ColorCieLab;
 import org.apache.commons.imaging.color.ColorConversions;
@@ -69,6 +68,9 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
 
         for (int i = 0; i < n; i++)
             colors.add(colorGenerator.next());
+
+        if (n == 1)
+            return new HashSet<>(colors);
 
         refineColors(colors);
 
