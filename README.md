@@ -20,8 +20,8 @@ are picked such that the distance in perception is maximized.
 
 * *Isn't it just easier and faster to use tables of visually distinct colors?*
 
-  It is! In fact, generating the optimal set of colors may be too slow for your application. Our
-  plan is to include static tables in future versions of quzah for different color set sizes.
+  It is! In fact, generating the optimal set of colors may be too slow for your application. For this
+  reason, Quzah includes static tables for different color set sizes.
 
 That said, you may want to generate your own color sets. For instance, if you want to pick colors
 from a subspace of the RGB color space. One example (also included in the library), is the
@@ -32,4 +32,3 @@ generation of pastel-like colors.
 ### 1.0.0
 
 * Make Quzah available in the central repository.
-* Include pregenerated color tables for 1..n colors.
