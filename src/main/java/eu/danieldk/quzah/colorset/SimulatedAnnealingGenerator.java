@@ -2,8 +2,8 @@ package eu.danieldk.quzah.colorset;
 
 import eu.danieldk.quzah.colorspace.RGB;
 import eu.danieldk.quzah.random.RandomRGB;
-import org.apache.commons.imaging.color.ColorCieLab;
-import org.apache.commons.imaging.color.ColorConversions;
+import org.apache.sanselan.color.ColorCIELab;
+import org.apache.sanselan.color.ColorConversions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,7 +83,7 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
      * @param labs The colors in CIE Lab.
      * @return The sum of Eucledian distances.
      */
-    private double totalDistance(List<ColorCieLab> labs) {
+    private double totalDistance(List<ColorCIELab> labs) {
         double sum = 0.;
 
         for (int i = 0; i < labs.size(); ++i)
@@ -99,7 +99,7 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
      * @param labs The colors in CIE Lab.
      * @return The pair of colors with the smalles Eucledian distance.
      */
-    public IndexPair minDistance(List<ColorCieLab> labs) {
+    public IndexPair minDistance(List<ColorCIELab> labs) {
         double minDistance = Double.MAX_VALUE;
         int minI = 0;
         int minJ = 0;
@@ -127,7 +127,7 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
      * @param candidateIdx The index of the color the candidate may replace.
      * @return The minimum distance.
      */
-    private double minCandidateDistance(List<ColorCieLab> labs, ColorCieLab candidate, int candidateIdx) {
+    private double minCandidateDistance(List<ColorCIELab> labs, ColorCIELab candidate, int candidateIdx) {
         double distance = Double.MAX_VALUE;
 
         for (int i = 0; i < labs.size(); ++i) {
@@ -151,7 +151,7 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
      * @param maxN        The maximum number of iterations.
      * @param temperature The temperature.
      */
-    public void iteration(List<RGB> rgbs, List<ColorCieLab> labs, int n, int maxN, double temperature) {
+    public void iteration(List<RGB> rgbs, List<ColorCIELab> labs, int n, int maxN, double temperature) {
         // Get the overall minimum distance.
         final IndexPair minDistancePair = minDistance(labs);
         double distance = minDistancePair.getDistance();
@@ -161,7 +161,7 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
 
         // The replacement color.
         RGB replacementRGB = rgbs.get(tuneIdx);
-        ColorCieLab replacementLab = labs.get(tuneIdx);
+        ColorCIELab replacementLab = labs.get(tuneIdx);
 
         // Probability of choosing rule 1 (see below).
         final double pRule1 = (double) (maxN - n) / (double) maxN;
@@ -185,7 +185,7 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
             else
                 newRGB = colorGenerator.nextWithinBox(rgbs.get(tuneIdx), 2);
 
-            ColorCieLab newLab = rgbToCIELab(newRGB);
+            ColorCIELab newLab = rgbToCIELab(newRGB);
 
             double newDist = minCandidateDistance(labs, newLab, tuneIdx);
 
@@ -215,7 +215,7 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
     private List<RGB> refineColors(List<RGB> colors) {
         double temperature = INITIAL_TEMPERATURE;
 
-        List<ColorCieLab> labs = new ArrayList<>(colors.size());
+        List<ColorCIELab> labs = new ArrayList<>(colors.size());
         for (RGB rgb : colors)
             labs.add(rgbToCIELab(rgb));
 
@@ -241,11 +241,11 @@ public class SimulatedAnnealingGenerator implements ColorSetGenerator {
      * @param lab2 The second Lab color.
      * @return The distance.
      */
-    private double cieLabDistance(ColorCieLab lab1, ColorCieLab lab2) {
+    private double cieLabDistance(ColorCIELab lab1, ColorCIELab lab2) {
         return Math.sqrt(Math.pow(lab1.L - lab2.L, 2.) + Math.pow(lab1.a - lab2.a, 2.) + Math.pow(lab1.b - lab2.b, 2.));
     }
 
-    private ColorCieLab rgbToCIELab(RGB rgb) {
+    private ColorCIELab rgbToCIELab(RGB rgb) {
         return ColorConversions.convertXYZtoCIELab(ColorConversions.convertRGBtoXYZ(rgb.getRGB()));
     }
 
