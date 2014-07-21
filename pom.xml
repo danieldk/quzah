@@ -121,6 +121,7 @@
                 <version>1.4</version>
                 <configuration>
                     <keyname>1689FB2E</keyname>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
                 </configuration>
                 <executions>
                     <execution>
